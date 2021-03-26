@@ -334,7 +334,7 @@ class AdvancedMedia extends AbstractMediaType
         $currentVersion = $this->getFFMpegDriver()->getVersion();
         /** @var ComplexFilterInterface $filter */
         foreach ($this->filters as $filter) {
-            if (version_compare($currentVersion, $filter->getMinimalFFMpegVersion(), '<')) {
+            if (is_int($currentVersion) && version_compare($currentVersion, $filter->getMinimalFFMpegVersion(), '<')) {
                 $messages[] = $filter->getName() . ' filter is supported starting from '
                     . $filter->getMinimalFFMpegVersion() . ' ffmpeg version';
             }
